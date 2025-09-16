@@ -1,37 +1,3 @@
-# PhotonPDF
-
-PhotonPDF is a lightweight, browser-based tool that lets you convert files into PDF without relying on any server-side processing. Everything runs locally in your browser for speed and privacy.
-
-## ✨ Features
-- Convert supported files directly to PDF.
-- Fast and privacy-friendly (no server upload).
-- Clean and responsive interface.
-- Works entirely client-side.
-
-## 🌐 Live Demo
-You can try it online here:  
-👉 [PhotonPDF on GitHub Pages](https://wilsonfrantine.github.io/photonpdf/)
-
-## 🚀 Run Locally
-Clone the repository and open the app in your browser:
-
-```bash
-git clone git@github.com:wilsonfrantine/photonpdf.git
-cd photonpdf
-open docs/index.html   # or open it manually in your browser
-```
-
-🤝 Contributing
-Contributions, issues, and feature requests are welcome!
-Feel free to open an issue or submit a pull request.
-
-📄 License
-This project is licensed under the terms of the MIT License.
-
----
-
-### 3. **LICENSE (MIT)**  
-
 MIT License
 
 Copyright (c) 2025 Wilson Frantine
@@ -54,4 +20,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----

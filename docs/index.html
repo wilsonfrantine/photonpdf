@@ -1,104 +1,110 @@
 <!doctype html>
+
 <html lang="pt-br">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
-  <title>photonPDF — PDF → Imagem</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta name="color-scheme" content="light dark" />
+  <title>PhotonPDF</title>
+  <!-- Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
-  <header class="header">
-    <div class="wrap">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>photonPDF</h1>
-          <div class="sub">Foque no essencial: abrir PDF e copiar a página como imagem.</div>
-        </div>
-        <div class="grow"></div>
-        <button id="themeToggle" class="btn ghost" title="Alternar tema">Tema</button>
-      </div>
+  <!-- overlay de drop (página inteira sensível) -->
 
-      <!-- Barra minimalista -->
-      <div class="toolbar toolbar--minimal">
-        <label class="fileBig">
-          <input id="file" type="file" accept="application/pdf" />
-          <span>📄 Abrir PDF</span>
-        </label>
-
-        <div class="pill tight">
-          <button id="prev" class="btn secondary" title="Anterior (←)">←</button>
-          <input id="page" type="number" value="1" min="1" step="1" aria-label="Página">
-          <span id="pageCount" class="muted small"></span>
-          <button id="next" class="btn secondary" title="Próxima (→)">→</button>
-        </div>
-
-        <button id="copyBtn" class="btn primaryBig" disabled>📋 Copiar imagem</button>
-
-        <details id="advPanel" class="adv">
-          <summary>Opções avançadas</summary>
-          <div class="adv__content">
-            <div class="row">
-              <div class="pill">
-                <span>DPI</span>
-                <input id="dpi" type="number" value="120" min="36" step="12" aria-label="DPI">
-              </div>
-              <div class="preset">
-                <button class="chip" data-dpi="96">96</button>
-                <button class="chip active" data-dpi="120">120</button>
-                <button class="chip" data-dpi="150">150</button>
-                <button class="chip" data-dpi="200">200</button>
-              </div>
-              <label class="pill">
-                <input type="checkbox" id="forceA4">
-                <span>Forçar A4</span>
-              </label>
-            </div>
-
-            <div class="row">
-              <button id="exportPng" class="btn secondary" disabled>Exportar PNG</button>
-              <button id="exportJpg" class="btn secondary" disabled>Exportar JPG</button>
-              <div class="pill">
-                <span>Lote</span>
-                <input id="rangeFrom" type="number" value="1" min="1" step="1" aria-label="Início" style="width:70px">
-                <span>—</span>
-                <input id="rangeTo" type="number" value="1" min="1" step="1" aria-label="Fim" style="width:70px">
-                <button id="exportZip" class="btn secondary" disabled>ZIP</button>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand-mini">PhotonPDF</div>
+      <button id="themeToggle" class="toggle" aria-pressed="true" title="Alternar tema">
+        <span class="sun" aria-hidden="true"><img width="30px" height="100%" src="https://cdn-icons-png.flaticon.com/512/5360/5360418.png"></span>
+      </button>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="grid">
-      <section class="card">
-        <div id="drop" class="drop">Arraste e solte um PDF aqui, ou use “Abrir PDF”.</div>
-        <div id="status" class="status muted"></div>
-        <div class="hint">A4 @ 120 dpi ≈ 992 × 1403 px • <em>pixels = pontos × dpi / 72</em>.</div>
+  <main class="hero" role="main">
+    <div class="container stack">
+      <h1 class="title">PhotonPDF</h1>
+      <p class="subtitle">Snap your pdf locally. All the data is yours.</p>
+
+      <label class="fileBig" aria-label="Abrir Arquivo">
+        <input id="file" type="file" accept="application/pdf" />
+        <span>📄 Open file</span>
+      </label>
+
+      <button id="infoBtn" class="btn outline" hidden>Informações do Arquivo</button>
+
+      <section id="infoPanel" class="info" hidden>
+        <div id="meta" class="muted small" aria-live="polite"></div>
+        <div id="status" class="muted small" role="status" aria-live="polite"></div>
       </section>
-      <section class="card">
-        <img id="preview" alt="Prévia da página" />
-        <div id="meta" class="muted small"></div>
-      </section>
+
+      <img id="preview" alt="Prévia do PDF" class="preview" />
+
+      <!-- Navegação mínima: aparece apenas com > 1 página -->
+      <div id="nav" class="nav" hidden>
+        <button id="prev" class="btn ghost" aria-label="Página anterior">←</button>
+        <input id="page" type="number" value="1" min="1" step="1" aria-label="Página atual">
+        <span id="pageCount" class="muted small" aria-live="polite"></span>
+        <button id="next" class="btn ghost" aria-label="Próxima página">→</button>
+      </div>
     </div>
   </main>
 
-  <!-- libs (sem integrity em dev local) -->
+  <footer class="footer">
+    <div class="container">
+      <small class="muted">Made with<span aria-hidden="true">❤️</span> by <a href="https://github.com/wilsonfrantine" target="_blank" rel="noopener">Wilson Frantine</a></small>
+      <a class="muted" href="https://github.com/wilsonfrantine/photonpdf" target="_blank" rel="noopener">Code on GitHub</a>
+    </div>
+  </footer>
+
+  <!-- Painel avançado + export escondidos (compatibilidade com main.js) -->
+  <details id="advPanel" class="adv" hidden>
+    <summary>Opções</summary>
+    <div class="adv__content">
+      <div class="row">
+        <div class="pill">
+          <span>DPI</span>
+          <input id="dpi" type="number" value="120" min="36" step="12" aria-label="DPI">
+        </div>
+        <div class="preset">
+          <button class="chip" data-dpi="96">96</button>
+          <button class="chip active" data-dpi="120">120</button>
+          <button class="chip" data-dpi="150">150</button>
+          <button class="chip" data-dpi="200">200</button>
+        </div>
+        <label class="pill">
+          <input type="checkbox" id="forceA4">
+          <span>Forçar A4</span>
+        </label>
+      </div>
+      <div class="row">
+        <button id="exportPng" class="btn outline" disabled>Exportar PNG</button>
+        <button id="exportJpg" class="btn outline" disabled>Exportar JPG</button>
+        <div class="pill">
+          <span>Lote</span>
+          <input id="rangeFrom" type="number" value="1" min="1" step="1" aria-label="Início" style="width:70px">
+          <span>—</span>
+          <input id="rangeTo" type="number" value="1" min="1" step="1" aria-label="Fim" style="width:70px">
+          <button id="exportZip" class="btn outline" disabled>ZIP</button>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <!-- Toast para “Imagem copiada” -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- libs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script>
-    if (window.pdfjsLib) {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-    } else {
-      console.error("PDF.js não carregou.");
-    }
-  </script>
+  <script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";}</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <script type="module" src="assets/js/main.js"></script>
+  <!-- seus módulos -->
+  <script type="module" src="/assets/js/main.js"></script>
+  <script type="module" src="/assets/js/minimal.js"></script>
 </body>
 </html>
 

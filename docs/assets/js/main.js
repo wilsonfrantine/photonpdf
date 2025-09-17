@@ -1,7 +1,7 @@
 import { $, $$, setStatus, clamp } from "./utils.js";
 import RendererDefault, { PDFRenderer as RendererNamed } from "./renderer.js";
 import { exportSingle, exportZip } from "./exporter.js";
-import { setupThemeToggle, wireDragAndDrop, updateChips, updateCounts, showPreview } from "./ui.js";
+import { setupThemeToggle, updateChips, updateCounts, showPreview } from "./ui.js";
 
 const PDFRendererClass = RendererNamed || RendererDefault;
 
@@ -40,7 +40,6 @@ els.forceA4.checked = !!prefs.forceA4;
 updateChips(els.dpi.value);
 
 setupThemeToggle();
-wireDragAndDrop(els.drop, handleFile);
 
 // eventos essenciais
 els.file.addEventListener("change", e=>{
@@ -49,7 +48,6 @@ els.file.addEventListener("change", e=>{
 els.prev.addEventListener("click", ()=>{ if(!numPages) return; currentPage = clamp(currentPage-1, 1, numPages); els.page.value = currentPage; renderCurrent(); });
 els.next.addEventListener("click", ()=>{ if(!numPages) return; currentPage = clamp(currentPage+1, 1, numPages); els.page.value = currentPage; renderCurrent(); });
 els.page.addEventListener("change", ()=>{ if(!numPages) return; currentPage = clamp(parseInt(els.page.value||"1",10), 1, numPages); renderCurrent(); });
-els.copyBtn.addEventListener("click", copyCurrentToClipboard);
 
 // avançadas (auto-render ao mudar)
 els.dpi.addEventListener("change", ()=>{ updateChips(els.dpi.value); savePrefs(); if(numPages) renderCurrent(); });
@@ -61,7 +59,6 @@ els.exportJpg.addEventListener("click", ()=> exportCurrent("jpg"));
 
 els.rangeFrom.addEventListener("change", syncRange);
 els.rangeTo.addEventListener("change", syncRange);
-els.exportZip.addEventListener("click", exportRangeZip);
 
 // atalhos
 document.addEventListener("keydown", e=>{
@@ -93,10 +90,6 @@ async function handleFile(file){
     console.error(e);
     setStatus(els.status, "Erro ao carregar o PDF.", "err");
   }
-}
-
-function toggleActions(enabled){
-  [els.copyBtn, els.exportPng, els.exportJpg, els.exportZip].forEach(b=> b.disabled = !enabled);
 }
 
 async function renderCurrent(){

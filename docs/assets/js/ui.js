@@ -1,4 +1,4 @@
-import { $, $$, clamp, a4PixelsAtDPI, blobToObjectURL, setStatus } from "./utils.js";
+import { $, $$, clamp, a4PixelsAtDPI, blobToObjectURL} from "./utils.js";
 
 export function setupThemeToggle(){
   const btn = $("#themeToggle");

@@ -1,0 +1,5 @@
+
+# swaps e temporários do editor
+*.swp
+.*.swp
+*~

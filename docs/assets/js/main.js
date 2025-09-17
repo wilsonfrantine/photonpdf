@@ -1,7 +1,7 @@
-import { $, $$, setStatus, clamp } from "/assets/js/utils.js";
-import RendererDefault, { PDFRenderer as RendererNamed } from "/assets/js/renderer.js";
-import { exportSingle, exportZip } from "/assets/js/exporter.js";
-import { setupThemeToggle, updateChips, updateCounts, showPreview } from "/assets/js/ui.js";
+import { $, $$, setStatus, clamp } from "./utils.js";
+import RendererDefault, { PDFRenderer as RendererNamed } from "./renderer.js";
+import { exportSingle, exportZip } from "./exporter.js";
+import { setupThemeToggle, updateChips, updateCounts, showPreview } from "./ui.js";
 
 const PDFRendererClass = RendererNamed || RendererDefault;
 

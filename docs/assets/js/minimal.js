@@ -1,6 +1,6 @@
 // /assets/js/minimal.js — camada de UX minimalista
-import { $ } from "./assets/js/utils.js";
-import { copyBlobToClipboardPNG } from "./assets/js/clipboard.js";
+import { $ } from "./utils.js";
+import { copyBlobToClipboardPNG } from "./clipboard.js";
 
 const els = {
   file: $("#file"),
